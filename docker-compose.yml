@@ -1,0 +1,27 @@
+version: '2'
+services:
+  app:
+    build: ./
+    restart: 'always'
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/app/src
+      - ./tests:/app/tests
+    env_file:
+      - .env
+    depends_on:
+      - mariadb
+
+  mariadb:
+    restart: 'always'
+    image: mariadb:latest
+    ports:
+      - "3306:3306"
+    env_file:
+      - .env
+    environment:
+      MYSQL_DATABASE: boltons
+    command: --init-file /data/application/init.sql
+    volumes:
+        - ./init.sql:/data/application/init.sql

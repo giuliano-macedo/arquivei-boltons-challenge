@@ -1,0 +1,8 @@
+SET GLOBAL time_zone = '-3:00';
+CREATE DATABASE IF NOT EXISTS boltons;
+USE boltons;
+CREATE TABLE IF NOT EXISTS nfe(
+    access_key VARCHAR(44) PRIMARY KEY NOT NULL,
+    total_value DECIMAL(50,2) NOT NULL,
+    modfied_date TIMESTAMP DEFAULT NOW() ON UPDATE NOW()
+);
